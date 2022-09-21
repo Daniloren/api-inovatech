@@ -12,7 +12,7 @@ db.connect();
 app.use(cors());
 app.use(express.json());
 app.use("/users", userRoutes);
-app.use("/login", userRoutes);
-app.use("/curso", userRoutes);
+//app.use("/login", userRoutes);
+//app.use("/curso", userRoutes);
 
 module.exports = app;
