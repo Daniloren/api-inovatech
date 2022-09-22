@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const userSchema = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     name: {
@@ -12,12 +13,14 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: false
+        required: true
     },
     createdAt: {
         type: Date,
         default: new Date()
     }
+
+    
 });
 
 module.exports = mongoose.model('user', userSchema);
