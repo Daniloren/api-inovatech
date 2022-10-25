@@ -18,14 +18,17 @@ const getUser = async (req, res) => {
   UserSchema.findById(req.params.id, function (err, users) {
     console.log(req.params.id)
     if (err) {
+      console.log("Tem erro")
       // qdo dá erro retorna 500
       res.status(500).send({ message: err.message })
     }
     if (!users) {
+      console.log("Não tem usuário")
       // qdo usuario não é encotrado retorna 404
       res.status(404).send({ message: 'usuário não encontrado' })
     }
     //qdo retorna 200 informação encontrada
+    console.log("Tem usuário")
     res.status(200).send(users)
   })
 }
@@ -59,20 +62,26 @@ const saveUser = async (req, res) => {
 const updateUserById = async (req, res) => {
   try {
     const findUser = await UserSchema.findById(req.params.id)
+    console.log("Usuário encontrado",findUser)
 
     if (findUser) {
+      console.log("Entrou no if")
       findUser.name = req.body.name || findUser.name
       findUser.email = req.body.email || findUser.email
     }
+    console.log("Saiu do if")
 
     const savedUser = await findUser.save()
+    console.log("Salvou usuário")
 
     res.status(200).json({
       message: 'Usuário atualizado com sucesso!',
       savedUser
     })
   } catch (error) {
+    console.log("Entrou no cath")
     console.error(error)
+    res.status(500).send()
   }
 }
 
